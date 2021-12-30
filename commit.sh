@@ -1,3 +1,4 @@
 branch=$(git branch | sed -n -e 's/^\* \(.*\)/\1/p')
-git commit -am 'ac'
+time=$(date "+%Y%m%d%H%M%S")
+git commit -am 'ac $time'
 git push -u origin $branch
