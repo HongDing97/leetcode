@@ -1,5 +1,5 @@
 *
 
 !.gitignore
-!solve.js
+!solve.ts
 !commit.sh
