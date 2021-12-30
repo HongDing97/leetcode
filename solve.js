@@ -73,7 +73,7 @@ MyLinkedList.prototype.deleteAtIndex = function (index) {
     if (!p.next)
         return
     // 真是个大坑！
-    // 一旦引入尾指针，要时刻注意维护尾指针的真是指向！
+    // 一旦引入尾指针，要时刻注意维护尾指针的真实指向！
     // if it's the last node
     if (!p.next.next)
         this.r = p
