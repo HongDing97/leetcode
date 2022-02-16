@@ -9,7 +9,7 @@ class TreeNode {
     }
 }
 
-function levelOrder(root: TreeNode | null): number[][] {
+function levelOrderBottom(root: TreeNode | null): number[][] {
     const res: number[][] = [], queue: TreeNode[] = []
     root && queue.push(root)
     while (queue.length) {
@@ -23,5 +23,5 @@ function levelOrder(root: TreeNode | null): number[][] {
         }
         res.push(r)
     }
-    return res
+    return res.reverse()
 };
