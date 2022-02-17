@@ -9,6 +9,23 @@ class TreeNode {
     }
 }
 
+function createTree(nodes: (number | null)[]): TreeNode | null {
+    if (!nodes.length)
+        return null
+    const root = new TreeNode(nodes.shift()!), queue: TreeNode[] = [root]
+    while (queue.length) {
+        const len = queue.length
+        for (let i = 0; i < len; i++) {
+            const t = queue.shift()!, l = nodes.shift(), r = nodes.shift()
+            t.left = l ? new TreeNode(l, null, null) : null
+            t.right = r ? new TreeNode(r, null, null) : null
+            t.left && queue.push(t.left)
+            t.right && queue.push(t.right)
+        }
+    }
+    return root
+}
+
 function invertTree(root: TreeNode | null): TreeNode | null {
     function travel(root: TreeNode | null) {
         if (!root)  
@@ -17,9 +34,12 @@ function invertTree(root: TreeNode | null): TreeNode | null {
         const t = root.left
         root.left = root.right
         root.right = t
-        t?.left && travel(t.left)
-        t?.right && travel(t.right)
+        root?.left && travel(root.left)
+        root?.right && travel(root.right)
     }
     travel(root)
     return root
 };
+
+const t = createTree([2,3,null,1])
+invertTree(t)
