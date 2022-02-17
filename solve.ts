@@ -9,3 +9,18 @@ class TreeNode {
     }
 }
 
+function maxDepth(root: TreeNode | null): number {
+    let deepth = 0
+    const queue: TreeNode[] = []
+    root && queue.push(root)
+    while (queue.length) {
+        let len = queue.length
+        for (let i = 0; i < len; i++) {
+            const t = queue.shift()
+            t?.left && queue.push(t.left)
+            t?.right && queue.push(t.right)
+        }
+        deepth++
+    }
+    return deepth
+};
