@@ -27,28 +27,30 @@ function createTree(nodes: (number | null)[]): TreeNode | null {
 }
 
 function isSymmetric(root: TreeNode | null): boolean {
+
     type TNode = TreeNode | null
+
     function isNodeEqual(a: TNode, b: TNode) {
         return (a === null && b === null) || (a?.val === b?.val)
     }
+
     const queue: TNode[] = []
     root && queue.push(root)
     while (queue.length) {
         const len = queue.length, stack: TNode[] = []
         for (let i = 0; i < len; i++) {
             const t = queue.shift() as TNode
-            if (i < len / 2)
+            if (i < len / 2) 
                 stack.push(t)
             else {
-                if (!stack.length || !isNodeEqual(stack.pop()!, t))
+                if (!stack.length || !isNodeEqual(stack.pop() as TNode, t)) 
                     return false
             }
-            t?.left && queue.push(t.left)
-            t?.right && queue.push(t.right)
+            t && queue.push(t.left) && queue.push(t.right)
         }
     }
     return true
 };
 
-const root = createTree([1, 2, 2, null, 3, null, 3])
+const root = createTree([1, 2, 2, 3, null, null, 3])
 isSymmetric(root)
