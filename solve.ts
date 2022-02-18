@@ -9,18 +9,34 @@ class TreeNode {
     }
 }
 
+// 递归
 function maxDepth(root: TreeNode | null): number {
-    let deepth = 0
-    const queue: TreeNode[] = []
-    root && queue.push(root)
-    while (queue.length) {
-        let len = queue.length
-        for (let i = 0; i < len; i++) {
-            const t = queue.shift()
-            t?.left && queue.push(t.left)
-            t?.right && queue.push(t.right)
-        }
-        deepth++
+    let deepth = 0, maxDeepth = 0
+    function travel(root: TreeNode | null) {
+        if (!root)
+            return
+        if(++deepth > maxDeepth)
+            maxDeepth = deepth
+        travel(root.left)
+        travel(root.right)
+        deepth--
     }
-    return deepth
+    return maxDeepth
 };
+
+// 层序遍历
+// function maxDepth(root: TreeNode | null): number {
+//     let deepth = 0
+//     const queue: TreeNode[] = []
+//     root && queue.push(root)
+//     while (queue.length) {
+//         let len = queue.length
+//         for (let i = 0; i < len; i++) {
+//             const t = queue.shift()
+//             t?.left && queue.push(t.left)
+//             t?.right && queue.push(t.right)
+//         }
+//         deepth++
+//     }
+//     return deepth
+// };
