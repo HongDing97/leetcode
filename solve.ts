@@ -25,3 +25,7 @@ function createTree(nodes: (number | null)[]): TreeNode | null {
     }
     return root
 }
+
+function isBalanced(root: TreeNode | null): boolean {
+    
+};
