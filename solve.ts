@@ -25,3 +25,22 @@ function createTree(nodes: (number | null)[]): TreeNode | null {
     }
     return root
 }
+
+function findBottomLeftValue(root: TreeNode | null): number {
+    let deepest = 1, depth = 1, p = root
+    function dfs(root: TreeNode | null) {
+        if (!root)  return
+        if (((root.left && !root.left.left && !root.left.right) || (!root.left && root.right && !root.right.left && !root.right.right)) && depth + 1 > deepest) {
+            p = root.left ? root.left : root.right
+            deepest = depth + 1
+        }
+        depth++
+        dfs(root.left)
+        dfs(root.right)
+        depth--
+    }
+    dfs(root)
+    return p?.val!
+};
+
+findBottomLeftValue(createTree([0,null,-1]))
