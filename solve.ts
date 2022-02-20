@@ -25,3 +25,21 @@ function createTree(nodes: (number | null)[]): TreeNode | null {
     }
     return root
 }
+
+function findMaxIdx (nums: number[]): number {
+    let maxIdx = 0
+    for (let i = 1; i < nums.length; i++) {
+        if (nums[i] > nums[maxIdx])
+            maxIdx = i
+    }
+    return maxIdx
+} 
+
+function constructMaximumBinaryTree(nums: number[]): TreeNode | null {
+    if (!nums.length)
+        return null
+    const idx = findMaxIdx(nums), root = new TreeNode(nums[idx])
+    root.left = constructMaximumBinaryTree(nums.slice(0,idx))
+    root.right = constructMaximumBinaryTree(nums.slice(idx + 1))
+    return root
+};
