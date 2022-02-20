@@ -25,3 +25,18 @@ function createTree(nodes: (number | null)[]): TreeNode | null {
     }
     return root
 }
+
+function sumOfLeftLeaves(root: TreeNode | null): number {
+    let sum = 0
+    function travel(root: TreeNode | null) {
+        if (!root)  return 
+        if (root.left && !root.left.left && !root.left.right)
+            sum += root.left.val
+        travel(root.left)
+        travel(root.right)
+    }
+    travel(root)
+    return sum
+};
+
+sumOfLeftLeaves(createTree([3, 9, 20, null, null, 15, 7]))
