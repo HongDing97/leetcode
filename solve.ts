@@ -25,3 +25,23 @@ function createTree(nodes: (number | null)[]): TreeNode | null {
     }
     return root
 }
+
+function isSameTree(p: TreeNode | null, q: TreeNode | null): boolean {
+    const queue: (TreeNode | null) [] = []
+    queue.push(p, q)
+    while (queue.length) {
+        const len = queue.length
+        for (let i = 0; i< len; i++) {
+            const l = queue.pop(), r = queue.pop()
+            if (!l && !r)
+                continue
+            if (!l || !r || l.val !== r.val)
+                return false
+            queue.push(l.left)
+            queue.push(r.left)
+            queue.push(l.right)
+            queue.push(r.right)
+        }
+    }  
+    return queue.length === 0
+};
