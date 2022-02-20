@@ -26,3 +26,14 @@ function createTree(nodes: (number | null)[]): TreeNode | null {
     return root
 }
 
+function isBalanced(root: TreeNode | null): boolean {
+    function getHeight(root: TreeNode | null) {
+        if (!root)
+            return 0
+        const l = getHeight(root.left) + 1, r = getHeight(root.right) + 1
+        if (l === 0 || r === 0 || Math.abs(l - r) > 1)
+            return -1
+        return Math.max(l, r)
+    }
+    return getHeight(root) !== -1
+};
