@@ -25,3 +25,17 @@ function createTree(nodes: (number | null)[]): TreeNode | null {
     }
     return root
 }
+
+function buildTree(inorder: number[], postorder: number[]): TreeNode | null {
+    if (postorder.length === 0)
+        return null
+
+    const root = new TreeNode(postorder.pop())
+    const splitIndex = inorder.indexOf(root.val)
+
+    root.left = buildTree(inorder.slice(0, splitIndex), postorder.slice(0, splitIndex))
+    root.right = buildTree(inorder.slice(splitIndex + 1), postorder.slice(splitIndex))
+    return root
+};
+
+buildTree([9, 3, 15, 20, 7], [9, 15, 7, 20, 3])
