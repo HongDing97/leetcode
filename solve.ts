@@ -25,3 +25,21 @@ function createTree(nodes: (number | null)[]): TreeNode | null {
     }
     return root
 }
+
+function binaryTreePaths(root: TreeNode | null): string[] {
+    const res: string[] = [], path: TreeNode[] = []
+    function dfs(root: TreeNode | null) {
+        if (!root) return
+        path.push(root)
+        // 遍历到叶子节点
+        if (!root.left && !root.right)
+            res.push(path.map(n => n.val).join('->'))
+        dfs(root.left)
+        dfs(root.right)
+        path.pop()
+    }
+    dfs(root)
+    return res
+};
+
+binaryTreePaths(createTree([1, 2, 3, null, 5]))
