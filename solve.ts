@@ -25,3 +25,20 @@ function createTree(nodes: (number | null)[]): TreeNode | null {
     }
     return root
 }
+
+function hasPathSum(root: TreeNode | null, targetSum: number): boolean {
+    let sum = 0, flag = false
+    function dfs(root: TreeNode | null) {
+        if (!root || flag) return
+        sum += root.val
+        if (!root.left && !root.right && sum === targetSum)
+            flag = true
+        dfs(root.left)
+        dfs(root.right)
+        sum -= root.val
+    }
+    dfs(root)
+    return flag
+};
+
+hasPathSum(createTree([5, 4, 8, 11, null, 13, 4, 7, 2, null, null, null, 1]), 22)
