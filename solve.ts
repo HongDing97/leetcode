@@ -25,3 +25,21 @@ function createTree(nodes: (number | null)[]): TreeNode | null {
     }
     return root
 }
+
+
+
+function isValidBST(root: TreeNode | null): boolean {
+    let lastVisit: number | null = null
+    function dfs(root: TreeNode | null) {
+        if (!root) return true
+        const l = isValidBST(root.left)
+        if (lastVisit !== null && lastVisit >= root.val)
+            return false
+        lastVisit = root.val
+        const r = isValidBST(root.right)
+        return l && r
+    }
+    return dfs(root)
+};
+
+console.log(isValidBST(createTree([5,1,4,null,null,3,6])))
