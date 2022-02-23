@@ -27,19 +27,22 @@ function createTree(nodes: (number | null)[]): TreeNode | null {
 }
 
 
+let pre = null;
+var isValidBST = function (root) {
+    let pre = null;
+    const inOrder = (root) => {
+        if (root === null)
+            return true;
+        let left = inOrder(root.left);
 
-function isValidBST(root: TreeNode | null): boolean {
-    let lastVisit: number | null = null
-    function dfs(root: TreeNode | null) {
-        if (!root) return true
-        const l = isValidBST(root.left)
-        if (lastVisit !== null && lastVisit >= root.val)
-            return false
-        lastVisit = root.val
-        const r = isValidBST(root.right)
-        return l && r
+        if (pre !== null && pre.val >= root.val)
+            return false;
+        pre = root;
+
+        let right = inOrder(root.right);
+        return left && right;
     }
-    return dfs(root)
+    return inOrder(root);
 };
 
 console.log(isValidBST(createTree([5,1,4,null,null,3,6])))
