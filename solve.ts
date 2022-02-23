@@ -25,3 +25,22 @@ function createTree(nodes: (number | null)[]): TreeNode | null {
     }
     return root
 }
+
+function lowestCommonAncestor(root: TreeNode | null, p: TreeNode | null, q: TreeNode | null): TreeNode | null {
+    if (!root || root === p || root === q)
+        return root
+    const left = lowestCommonAncestor(root.left, p, q)
+    const right = lowestCommonAncestor(root.right, p, q)
+    if (left && right)
+        return root
+    if (left && !right)
+        return left
+    else if (!left && right)
+        return right
+    else
+        return null
+};
+
+const root = createTree([3, 5, 1, 6, 2, 0, 8, null, null, 7, 4])
+const p = root?.left!, q = root?.right!
+lowestCommonAncestor(root, p, q)
