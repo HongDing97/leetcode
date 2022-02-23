@@ -25,3 +25,21 @@ function createTree(nodes: (number | null)[]): TreeNode | null {
     }
     return root
 }
+
+
+
+function getMinimumDifference(root: TreeNode | null): number {
+    let lastVisted: TreeNode | null = null, res: number = Infinity
+    inOrder(root)
+    return res
+    function inOrder(root: TreeNode | null) {
+        if (!root)  return
+        inOrder(root.left)
+        if (lastVisted) 
+            res = Math.min(res, root.val - lastVisted.val)
+        lastVisted = root 
+        inOrder(root.right)
+    }
+};
+
+getMinimumDifference(createTree([4,2,6,1,3]))
