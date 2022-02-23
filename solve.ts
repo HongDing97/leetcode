@@ -25,3 +25,28 @@ function createTree(nodes: (number | null)[]): TreeNode | null {
     }
     return root
 }
+
+function findMode(root: TreeNode | null): number[] {
+    let res: number[] = [], lastVisted: TreeNode = root! , cnt = 0, maxCnt = 1
+    inOrder(root)
+    return res
+    function inOrder(root: TreeNode | null) {
+        if (!root)  return
+        inOrder(root.left)
+        if (lastVisted.val === root.val)
+            cnt++
+        else
+            cnt = 1
+        if (cnt > maxCnt) {
+            res.length = 0
+            res.push(root.val)
+            maxCnt = cnt
+        }
+        else if (cnt === maxCnt) 
+            res.push(root.val)
+        lastVisted = root
+        inOrder(root.right)
+    }
+};
+
+findMode(createTree([1, null, 2, 2]))
