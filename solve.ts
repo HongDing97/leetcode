@@ -25,3 +25,25 @@ function createTree(nodes: (number | null)[]): TreeNode | null {
     }
     return root
 }
+
+function insertIntoBST(root: TreeNode | null, val: number): TreeNode | null {
+    if (!root)  return new TreeNode(val, null, null)
+
+    let lastVisited: TreeNode | null = null
+    dfs(root)
+    return root
+
+    function dfs(root: TreeNode | null) {
+        if (!root) {
+            if (lastVisited && val < lastVisited.val)
+                lastVisited.left = new TreeNode(val, null, null)
+            if (lastVisited && val > lastVisited?.val)
+                lastVisited.right = new TreeNode(val, null, null)
+        }
+        lastVisited = root
+        if (val < root?.val!)
+            dfs(root?.left!)
+        else if (val > root?.val!)
+            dfs(root?.right!)
+    }
+};
