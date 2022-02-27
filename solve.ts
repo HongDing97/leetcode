@@ -25,3 +25,31 @@ function createTree(nodes: (number | null)[]): TreeNode | null {
     }
     return root
 }
+
+// Iteration
+function lowestCommonAncestor(root: TreeNode | null, p: TreeNode | null, q: TreeNode | null): TreeNode | null {
+    let cur = root
+    while (cur) {
+        if (cur.val > p?.val! && cur.val > q?.val!)
+            cur = cur.left
+        else if (cur.val < p?.val! && cur.val < q?.val!)
+            cur = cur.right
+        else
+            return cur
+    }
+    return null
+};
+
+// Recursion
+// function lowestCommonAncestor(root: TreeNode | null, p: TreeNode | null, q: TreeNode | null): TreeNode | null {
+//     if (root?.val! < p?.val! && root?.val! < q?.val!) 
+//         return lowestCommonAncestor(root?.right!, p, q)
+//     else if (root?.val! > p?.val! && root?.val! > q?.val!)
+//         return lowestCommonAncestor(root?.left!, p, q)
+//     else
+//         return root
+// };
+
+const root = createTree([6,2,8,0,4,7,9,null,null,3,5])
+const p = root?.left!, q = root?.left?.right!
+lowestCommonAncestor(root, p, q)
