@@ -25,3 +25,30 @@ function createTree(nodes: (number | null)[]): TreeNode | null {
     }
     return root
 }
+
+function deleteNode(root: TreeNode | null, key: number): TreeNode | null {
+    if (!root)  return null
+    root.left = deleteNode(root.left, key)
+    if (key === root.val) {
+        if (!root.left && !root.right)
+            return null
+        else if (!root.left && root.right)
+            return root.right
+        else if (root.left && !root.right)
+            return root.left
+        else {
+            // root.left && root.right
+            // 找到左子树最右下方的节点
+            let cur = root.left!
+            while (cur.right)
+                cur = cur.right
+            cur.right = root.right
+            return root.left
+        }
+    }
+    root.right = deleteNode(root.right, key)
+    return root
+};
+
+const root = deleteNode(createTree([50,30,70,null,40,60,80]), 50)
+console.log('')
