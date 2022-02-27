@@ -25,3 +25,19 @@ function createTree(nodes: (number | null)[]): TreeNode | null {
     }
     return root
 }
+
+function convertBST(root: TreeNode | null): TreeNode | null {
+    let lastVisited: TreeNode | null = null
+    reversedInOrder(root)
+    return root
+    function reversedInOrder(root: TreeNode | null) {
+        if (!root)  return
+        reversedInOrder(root.right)
+        if (lastVisited)
+            root.val += lastVisited.val
+        lastVisited = root
+        reversedInOrder(root.left)
+    }
+};
+
+
