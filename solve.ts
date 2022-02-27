@@ -22,6 +22,8 @@ function restoreIpAddresses(s: string): string[] {
             if (!validate(t))
                 continue
             path.push(t)
+            // 注意是 startIdx + i, 因为可能是选取的 1、2、3 长度的数字段
+            // 所以也应该越到 1、2、3 个后面数字继续取用
             dfs(startIdx + i, deepth + 1)
             path.pop()
         }
