@@ -25,3 +25,12 @@ function createTree(nodes: (number | null)[]): TreeNode | null {
     }
     return root
 }
+
+function sortedArrayToBST(nums: number[]): TreeNode | null {
+    if (!nums.length) return null
+    if (nums.length === 1) return new TreeNode(nums[0], null, null)
+    let low = 0, high = nums.length - 1, mid = Math.floor((high + low) / 2)
+    return new TreeNode(nums[mid], sortedArrayToBST(nums.slice(low, mid)), sortedArrayToBST(nums.slice(mid + 1, high + 1)))
+};
+
+const root = sortedArrayToBST([-10, -3, 0, 5, 9])
