@@ -2,6 +2,7 @@
   "compilerOptions": {
       "target": "es2015",
       "strictNullChecks": true,
+      "noImplicitAny": true,
       "outDir": "./dist",
       "sourceMap": true
   }
