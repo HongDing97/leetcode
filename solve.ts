@@ -11,4 +11,4 @@ function canJump(nums: number[]): boolean {
     return false
 };
 
-canJump([3,0,8,2,0,0,1])
+canJump([3,2,1,0,4])
