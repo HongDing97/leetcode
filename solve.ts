@@ -25,3 +25,23 @@ function createTree(nodes: (number | null)[]): TreeNode | null {
     }
     return root
 }
+
+function minCameraCover(root: TreeNode | null): number {
+    let cnt = 0
+    if (postOrder(root) === 0)
+        cnt++
+    return cnt
+    function postOrder(root: TreeNode | null) {
+        // 0 - 无覆盖
+        // 1 - 有摄像头
+        // 2 - 无覆盖
+        if (!root) return 2
+        let l = postOrder(root.left), r = postOrder(root.right)
+        if (l === 2 && r === 2) return 0
+        if (l == 0 || r === 0) {
+            cnt++
+            return 1
+        }
+        if (l == 1 || r == 1) return 2
+    }
+};
