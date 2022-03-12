@@ -25,3 +25,18 @@ function createTree(nodes: (number | null)[]): TreeNode | null {
     }
     return root
 }
+
+function rob(root: TreeNode | null): number {
+    const dp = postOrder(root)
+    return Math.max(...dp)
+    function postOrder(root: TreeNode | null) {
+        if (!root) return [0, 0]
+        const l = postOrder(root.left), r = postOrder(root.right)
+        // 处理根节点
+        // 如果 root 不偷，那么左右子树可以偷；
+        // 如果 root 偷了，那么左右子树就不能偷
+        return [Math.max(l[0], l[1]) + Math.max(r[0], r[1]), l[0] + r[0] + root.val]
+    }
+};
+
+rob(createTree([3, 2, 3, null, 3, null, 1]))
