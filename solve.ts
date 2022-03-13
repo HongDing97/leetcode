@@ -1,15 +1,15 @@
-function findLengthOfLCIS(nums: number[]): number {
-    const dp = new Array(nums.length).fill(1)
-    let res = 1
-    for (let i = 1; i < nums.length; i++) {
-        if (nums[i] > nums[i - 1])
-            dp[i] = dp[i - 1] + 1
-        else
-            dp[i] = 1
-        if (res < dp[i])
-            res = dp[i]
+function findLength(nums1: number[], nums2: number[]): number {
+    const dp = new Array(nums1.length + 1).fill(0).map(e => new Array(nums2.length + 1).fill(0))
+    let res = 0
+    for (let i = 1; i <= nums1.length; i++) {
+        for (let j = 1; j <= nums2.length; j++) {
+            if (nums1[i - 1] === nums2[j - 1])
+                dp[i][j] = dp[i - 1][j - 1] + 1
+            if (dp[i][j] > res)
+                res = dp[i][j]
+        }
     }
     return res
 };
 
-findLengthOfLCIS([1, 1, 1, 1, 1])
+findLength([1, 2, 3, 2, 1], [3, 2, 1, 4, 7])
